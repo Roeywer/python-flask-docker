@@ -1,0 +1,34 @@
+name: python-flask-docker
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v2
+          
+        - name: Docker Pull
+          run: docker pull lvthillo/python-flask-docker
+             
+        - name: Run the container
+          run: docker run --name my-container -d -p 8080:8080 lvthillo/python-flask-docker
+          
+        - name: Build the Docker image
+          run: docker build . --file Dockerfile
+          
+        - name: Test if App is running (Curl)
+          run: curl http://localhost:8080/
+             
+        - name: Verify ip
+          run: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my-container
+             
+        - name: Verify Hostname
+          run: docker inspect -f '{{ .Config.Hostname }}' my-container
