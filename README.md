@@ -1,37 +1,40 @@
-# python-flask-docker
-Basic Python Flask app in Docker which prints the hostname and IP of the container
+# Continuous Integration assignment 1
+Build,Run and test Python Flask app.
 
-### Build application
-Build the Docker image manually by cloning the Git repo.
-```
-$ git clone https://github.com/lvthillo/python-flask-docker.git
-$ docker build -t lvthillo/python-flask-docker .
-```
+### Trigger
+This action will run on push or pull requests.
 
-### Download precreated image
-You can also just download the existing image from [DockerHub](https://hub.docker.com/r/lvthillo/python-flask-docker/).
+### Docker Pull - Donload the docker Image from repository.
+
 ```
-docker pull lvthillo/python-flask-docker
+run: docker pull lvthillo/python-flask-docker
 ```
 
-### Run the container
-Create a container from the image.
+### Run the container and listen to port 8080.
+
 ```
-$ docker run --name my-container -d -p 8080:8080 lvthillo/python-flask-docker
+run: docker run --name my-container -d -p 8080:8080 lvthillo/python-flask-docker
 ```
 
-Now visit http://localhost:8080
+### Build the Docker image - install all dependencies from the docker file.
 ```
- The hostname of the container is 6095273a4e9b and its IP is 172.17.0.2. 
-```
-
-### Verify the running container
-Verify by checking the container ip and hostname (ID):
-```
-$ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my-container
-172.17.0.2
-$ docker inspect -f '{{ .Config.Hostname }}' my-container
-6095273a4e9b
+run: docker build . --file Dockerfile 
 ```
 
+### Test if App is running (Curl)
+I used curl command
+```
+run: curl http://localhost:8080/
+```
+This display a web page with the host name an ip address.
 
+### I verify that the ip is the same as the running container ip.
+```
+run: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my-container
+```
+This command display the ip address of the docer that is the same as the app web page shows.
+
+### I verify the host name that is the same as the running container host name.
+```
+run: docker inspect -f '{{ .Config.Hostname }}' my-container
+```
