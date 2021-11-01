@@ -1,10 +1,10 @@
 # Continuous Integration assignment 1
-Build,Run and test Python Flask app.
+Build, Run and test Python Flask app.
 
 ### Trigger
-This action will run on push or pull requests.
+This workflows actions will run on push or pull requests.
 
-### Docker Pull - Donload the docker Image from repository.
+### Docker Pull - Download the docker Image from repository.
 
 ```
 run: docker pull lvthillo/python-flask-docker
@@ -16,17 +16,16 @@ run: docker pull lvthillo/python-flask-docker
 run: docker run --name my-container -d -p 8080:8080 lvthillo/python-flask-docker
 ```
 
-### Build the Docker image - install all dependencies from the docker file.
+### Build the Docker image - install all dependencies from a docker file.
 ```
 run: docker build . --file Dockerfile 
 ```
 
 ### Test if App is running (Curl)
-I used curl command
+I used curl command that display a web page with the host name an ip address.
 ```
 run: curl http://localhost:8080/
 ```
-This display a web page with the host name an ip address.
 
 ### I verify that the ip is the same as the running container ip.
 ```
