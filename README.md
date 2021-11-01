@@ -37,3 +37,4 @@ This command display the ip address of the docer that is the same as the app web
 ```
 run: docker inspect -f '{{ .Config.Hostname }}' my-container
 ```
+This command display the host name of the docer that is the same as the app web page shows.
