@@ -18,4 +18,4 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t roeywer/python-flask-docker:v1 .
+          docker build -t roeywer/images:python-flask-docker .
